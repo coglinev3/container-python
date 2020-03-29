@@ -34,10 +34,12 @@ script:
   # show container python version
   - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
 
-  # if on master branch push image to dockerhub
+  # if on master branch push image with all tags to dockerhub
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
       docker push ${IMAGE_NAME}:${IMAGE_TAG};
-      docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-      docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+      if [ -z $IMAGE_ALTERNATE_TAG ]; then
+        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+        docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+      fi
     fi
