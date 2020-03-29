@@ -73,7 +73,7 @@ ansible-playbook python-ubuntu-16.04.yml
 
 ## Version
 
-Release: 1.0.0
+Release: 1.0.1
 
 ## License
 
