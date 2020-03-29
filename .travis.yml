@@ -17,12 +17,12 @@ install:
 
 before_script:
   - ansible --version
-  # - ansible-config view
-  - ansible-config dump
+  # Create ansible directory
+  - mkdir -p /etc/ansible
   # Create roles directory
   - mkdir -p ~/.ansible/roles
   # Move Inventory file
-  - mv hosts ~/.ansible
+  - sudo mv hosts /etc/ansible
   # Install required Ansible Role(s)
   - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
