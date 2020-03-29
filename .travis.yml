@@ -28,14 +28,15 @@ before_script:
   - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
 script:
-  # Build Alpine image
+  # Build image with Ansible
   - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
 
+after_success:
   # show container os-release
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
+  - docker run -it --rm ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
 
   # show container python version
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
+  - docker run -it --rm ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
 
   # if on master branch push image with all tags to dockerhub
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
