@@ -40,10 +40,11 @@ script:
   # if on master branch push image with all tags to dockerhub
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
-      echo docker push ${IMAGE_NAME}:${IMAGE_TAG};
       docker push ${IMAGE_NAME}:${IMAGE_TAG};
       if [ -z $IMAGE_ALTERNATE_TAG ]; then
         docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
         docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
       fi
+    else
+      echo docker push ${IMAGE_NAME}:${IMAGE_TAG};
     fi
