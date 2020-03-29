@@ -17,7 +17,7 @@ install:
 
 before_script:
   - ansible --version
-  - ansible-config view
+  # - ansible-config view
   - ansible-config dump
   # Create roles directory
   - mkdir roles
