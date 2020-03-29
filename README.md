@@ -8,6 +8,9 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
 
 ## Tags
 
+  - `Alpine 3.9`: Alpine Linux 3.9
+  - `Alpine 3.10`: Alpine Linux 3.10
+  - `Alpine 3.11`: Alpine Linux 3.11
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
 
@@ -73,7 +76,7 @@ ansible-playbook python-ubuntu-16.04.yml
 
 ## Version
 
-Release: 1.0.1
+Release: 1.1.0
 
 ## License
 
