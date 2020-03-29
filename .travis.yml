@@ -9,7 +9,9 @@ env:
     - secure: Zttb1fKDp2P55s42detUW7runltQBkEpy7b7jf5StNX2ExxlxN1DdaAsIFiFVVrYLhnetXeSB7pnPuX/KpRPSF9fzH8fBXoPzzKq49+G71KA2hQhMOo+OzBpmlXdq/P5Al6Ob2Ckq5IZhKgxpEbrry4DMIaxHP07kSdkDZBTAOgHVG8ZrwL+7pzkJp8aTXa0bSPRueiOeXzVWNw2alTEbKfdcvrHYmhAGTx4zOHGMlN/gZsjutt+iVUK7u6uHbwbCznZa8tfH5yuUmv9ccrTU5zmJsctGQSeMevIQy8Quk8YCR4w5E7hqJsibxM5lMXZgO51mw6tlNkncUdKcXp4Qw8kTMiLGn4dwzMRf52BvFSBy8KPShPGJt71Er3UEAQZi51Ezq7tWoPmOzh+zjccH/35V0J0fmNHlAcQv+lWgE8q9ws/tqW/H6GfCJix17TH9T/kG7C2b8jsqJgbo+3ZUhRGCOfuGOi6Hrgi6nhyksAQdTsbBra12yuGnOaVQ7Mk9n8A6W8D0YhCOrCNSJnapcjmrm+4IKXXXwbIvlsl29ZP2cKIUif+jV5wTWcgSXUsHD8p4mAHCNg+YxMJACn44bHKkjgXObjRyRywtDesi2Qas7f7LNyHNWEd5FRDWY5sBCR0aNkq9s8gEHVy3nmU+a9xMclZCS9JOJNKLVVx9eU=
   matrix:
     - IMAGE_TAG: ubuntu-16.04
+      IMAGE_ALTERNATE_TAG: ubuntu-xenial
     - IMAGE_TAG: ubuntu-18.04
+      IMAGE_ALTERNATE_TAG: ubuntu-bionic
 
 install:
   # Upgrade Docker and Python
@@ -34,6 +36,8 @@ script:
 
   # if on master branch push image to dockerhub
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
       docker push ${IMAGE_NAME}:${IMAGE_TAG};
+      docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+      docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
     fi
