@@ -17,18 +17,14 @@ install:
 
 before_script:
   - ansible --version
-  # Create ansible directory
-  - sudo mkdir -p /etc/ansible
   # Create roles directory
   - mkdir -p ~/.ansible/roles
-  # Move Inventory file
-  - sudo mv hosts /etc/ansible
   # Install required Ansible Role(s)
   - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
 script:
   # Build Alpine image
-  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
+  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml -i hosts
 
   # show container os-release
   - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
