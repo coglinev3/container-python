@@ -17,11 +17,12 @@ env:
       IMAGE_ALTERNATE_TAG: ubuntu-bionic
 
 install:
-  # Upgrade Docker and Python
-  - pip install molecule docker
+  # Install ansible and python docker module
+  - pip install ansible docker
 
 before_script:
-  - ansible --version
+  # Setup Ansible config file
+  - mv ansible.cfg ~/.ansible.cfg
   # Create roles directory
   - mkdir -p ~/.ansible/roles
   # Install required Ansible Role(s)
@@ -29,7 +30,7 @@ before_script:
 
 script:
   # Build image with Ansible
-  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
+  - ansible-playbook python-${IMAGE_TAG}.yml
 
 after_success:
   # show container os-release
