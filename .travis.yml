@@ -41,7 +41,7 @@ script:
   - if [[ "$TRAVIS_BRANCH" == "develop" ]]; then
       docker login -u coglinev3 -p $DOCKER_PASSWORD;
       docker push ${IMAGE_NAME}:${IMAGE_TAG};
-      if [ -z $IMAGE_ALTERNATE_TAG ]; then
+      if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
         docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
         docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
       fi
