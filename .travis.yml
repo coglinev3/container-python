@@ -24,7 +24,7 @@ before_script:
 
 script:
   # Build Alpine image
-  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml -i hosts
+  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
 
   # show container os-release
   - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
