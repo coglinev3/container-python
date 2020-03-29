@@ -18,7 +18,7 @@ install:
 before_script:
   - ansible --version
   # Create ansible directory
-  - mkdir -p /etc/ansible
+  - sudo mkdir -p /etc/ansible
   # Create roles directory
   - mkdir -p ~/.ansible/roles
   # Move Inventory file
