@@ -13,7 +13,7 @@ env:
 
 install:
   # Upgrade Docker and Python
-  - sudo pip install molecule docker
+  - pip install molecule docker
 
 before_script:
   - ansible --version
@@ -28,16 +28,17 @@ before_script:
 
 script:
   # Build Alpine image
-  - ansible-playbook python-${IMAGE_TAG}.yml
+  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
 
-  # Show os version
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
-
-  # Verify Python 3 is available in the container
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
-
-  # On success and on master branch push image to github
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-      docker push ${IMAGE_NAME}:${IMAGE_TAG};
+  # On success
+  # - show container os-release
+  # - show container python version
+  # - if master branch push image to dockerhub
+  - if [[ $? -eq 0 ]]; then
+      docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release;
+      docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version;
+      if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+        docker push ${IMAGE_NAME}:${IMAGE_TAG};
+      fi
     fi
