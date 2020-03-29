@@ -13,7 +13,7 @@ env:
 
 install:
   # Upgrade Docker and Python
-  - sudo pip3 install molecule docker
+  - sudo pip install molecule docker
 
 before_script:
   - ansible --version
