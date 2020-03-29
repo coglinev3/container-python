@@ -20,9 +20,11 @@ before_script:
   # - ansible-config view
   - ansible-config dump
   # Create roles directory
-  - mkdir roles
+  - mkdir -p ~/.ansible/roles
+  # Move Inventory file
+  - mv hosts ~/.ansible
   # Install required Ansible Role(s)
-  - ansible-galaxy install -r requirements.yml -p roles
+  - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
 script:
   # Build Alpine image
