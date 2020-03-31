@@ -12,7 +12,7 @@ addons:
     - python3-software-properties
     - python3-wheel
 
-language: generic
+language: minimal
 
 services:
   - docker
