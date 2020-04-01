@@ -1,26 +1,48 @@
 ---
-language: python
-services: docker
+dist: bionic
+addons:
+  apt:
+    packages:
+    - docker-ce
+    - libssl-dev
+    - libffi-dev
+    - python3
+    - python3-pip
+    - python3-setuptools
+    - python3-software-properties
+    - python3-wheel
+
+language: minimal
+
+services:
+  - docker
 
 env:
   global:
-    - IMAGE_NAME: coglinev3/python
-    - secure: EtrkznW0+0tiG+h8TDnDsk/Nuwwm/rfLmXfw6bJrant0irC4j6V2U5Y9zjR1IAF/gQTr30NlODFSV3sNqddY11+Uih5t5iVnHM6CZS73231FA/Mnp/E1Lw+/6vBfzqTBeB0JcBvSCqZYqlZct6WhE+ZHGw3nVZGZLYyBy9dE4Kz+VI9WmmhBnldMrvXkUfIelYptNLW4x1L5DuUxiGqGU1X+7VvO/URGtdslUmlmNCVWqlvhLcvF3ylriwipJ2I0njoBh3rhy4J8wQvB5SK+URrr8T9/rSFg9Xn9fWlzKwsK6I/+NyGxTJeZqXwEaPrgxZdG2K28KfU64QoQ6piOAxNDOlou+ODz7I6+RIuBvnOPtHEQn4SZKhX48GaMupwl8keSF2lDRFYXaiiZeECR3IF/oJ9Iv4fASSqFR3W73cO/MRoLxlfDbwY5TZB1541ZZ2QVdpEcr0hJ/mZSZJIIjV5p5YYUCxGNq9pZ8j8Hy+DHDuSLXKUs1gkwKrYMKbA5/+1ibtYt7L5XI8am07FLAs+MDFkAmfnd4xODATpqPrwAFBI91gSIbbUWu3yT4SflACBT3+xo/xEjHUDSQbB+pNg0WPcygnAOlRzSIj6RgPp8gQ/nBJlXjJi63o1qCwskBz/sYu7dHx8IuXjUJ6gOz+2vNZIj3wSwXlEqyhYXANw=
-    - secure: Zttb1fKDp2P55s42detUW7runltQBkEpy7b7jf5StNX2ExxlxN1DdaAsIFiFVVrYLhnetXeSB7pnPuX/KpRPSF9fzH8fBXoPzzKq49+G71KA2hQhMOo+OzBpmlXdq/P5Al6Ob2Ckq5IZhKgxpEbrry4DMIaxHP07kSdkDZBTAOgHVG8ZrwL+7pzkJp8aTXa0bSPRueiOeXzVWNw2alTEbKfdcvrHYmhAGTx4zOHGMlN/gZsjutt+iVUK7u6uHbwbCznZa8tfH5yuUmv9ccrTU5zmJsctGQSeMevIQy8Quk8YCR4w5E7hqJsibxM5lMXZgO51mw6tlNkncUdKcXp4Qw8kTMiLGn4dwzMRf52BvFSBy8KPShPGJt71Er3UEAQZi51Ezq7tWoPmOzh+zjccH/35V0J0fmNHlAcQv+lWgE8q9ws/tqW/H6GfCJix17TH9T/kG7C2b8jsqJgbo+3ZUhRGCOfuGOi6Hrgi6nhyksAQdTsbBra12yuGnOaVQ7Mk9n8A6W8D0YhCOrCNSJnapcjmrm+4IKXXXwbIvlsl29ZP2cKIUif+jV5wTWcgSXUsHD8p4mAHCNg+YxMJACn44bHKkjgXObjRyRywtDesi2Qas7f7LNyHNWEd5FRDWY5sBCR0aNkq9s8gEHVy3nmU+a9xMclZCS9JOJNKLVVx9eU=
+    - IMAGE_NAMESPACE: coglinev3
+    - IMAGE_NAME: python
   matrix:
-    - IMAGE_TAG: alpine-3.9
-    - IMAGE_TAG: alpine-3.10
     - IMAGE_TAG: alpine-3.11
-    - IMAGE_TAG: ubuntu-16.04
-      IMAGE_ALTERNATE_TAG: ubuntu-xenial
+    - IMAGE_TAG: alpine-3.10
+    - IMAGE_TAG: alpine-3.9
+    - IMAGE_TAG: debian-8
+      IMAGE_ALTERNATE_TAG: debian-jessie
+    - IMAGE_TAG: ubuntu-19.10
+      IMAGE_ALTERNATE_TAG: ubuntu-eoan
     - IMAGE_TAG: ubuntu-18.04
       IMAGE_ALTERNATE_TAG: ubuntu-bionic
+    - IMAGE_TAG: ubuntu-16.04
+      IMAGE_ALTERNATE_TAG: ubuntu-xenial
 
 install:
-  # Upgrade Docker and Python
-  - pip install molecule docker
+  # Install Ansible and Python Docker Module
+  - pip3 install ansible docker
 
 before_script:
+  # Configure Ansible
+  - cp .travis/ansible.cfg ~/.ansible.cfg
+  - mkdir -p ~/.ansible && cp .travis/hosts ~/.ansible
+  # Show Ansible version
   - ansible --version
   # Create roles directory
   - mkdir -p ~/.ansible/roles
@@ -28,27 +50,28 @@ before_script:
   - ansible-galaxy install -r requirements.yml -p ~/.ansible/roles
 
 script:
-  # Build Alpine image
-  - env ANSIBLE_FORCE_COLOR=1 ansible-playbook python-${IMAGE_TAG}.yml
+  # Build image with Ansible
+  - ansible-playbook python-${IMAGE_TAG}.yml
 
+after_success:
+  # Start a container from the new created image
+  - >
+    cid=$(docker run -d --rm --name check_python
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
+    tail -f /dev/null)
   # show container os-release
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
-
+  - docker exec ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
-  - docker run -it  ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
+  - >
+    docker exec ${cid} test -e /usr/bin/python3
+    && docker exec ${cid} env TERM=xterm python3 --version
+    || docker exec ${cid} env TERM=xterm python --version
+  # Stop the container
+  - docker stop ${cid}
 
-  # if on master branch push image with all tags to dockerhub
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
-      docker push ${IMAGE_NAME}:${IMAGE_TAG};
-      if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
-        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-        docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-      fi
-    else
-      echo docker push ${IMAGE_NAME}:${IMAGE_TAG};
-      if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
-        echo docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-        echo docker push ${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-      fi
-    fi
+deploy:
+  provider: script
+  script: bash scripts/docker_push
+  cleanup: false
+  on:
+    branch: master
