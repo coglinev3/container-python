@@ -8,9 +8,10 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
 
 ## Tags
 
-  - `Alpine 3.9`: Alpine Linux 3.9
-  - `Alpine 3.10`: Alpine Linux 3.10
-  - `Alpine 3.11`: Alpine Linux 3.11
+  - `alpine-3.9`: Alpine Linux 3.9
+  - `alpine-3.10`: Alpine Linux 3.10
+  - `alpine-3.11`: Alpine Linux 3.11
+  - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
 
@@ -66,7 +67,7 @@ Ansible and Docker must be installed.
 
 ## How to Build
 
-You can build the image with
+You can create an image locally, for example for Ubuntu 16.04, as follows:
 
 ```sh
 git clone https://github.com/coglinev3/container-python.git
@@ -76,7 +77,7 @@ ansible-playbook python-ubuntu-16.04.yml
 
 ## Version
 
-Release: 1.1.1
+Release: 1.2.0
 
 ## License
 
