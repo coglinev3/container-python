@@ -4,12 +4,12 @@
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 # push the image
-docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
+docker push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
 
 # push alternate tag if available
 if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
-  docker tag ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
-  docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+  docker tag ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
+  docker push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_ALTERNATE_TAG};
 fi
 
 # Logout from docker.io

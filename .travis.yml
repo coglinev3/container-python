@@ -19,6 +19,7 @@ services:
 
 env:
   global:
+    - IMAGE_NAMESPACE: coglinev3
     - IMAGE_NAME: python
   matrix:
     - IMAGE_TAG: alpine-3.11
@@ -56,13 +57,13 @@ after_success:
   # show container os-release
   - >
     docker run -it --rm
-    ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
     env TERM=xterm cat /etc/os-release
 
   # show container python version
   - >
     docker run -it --rm
-    ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
     env TERM=xterm test -e /usr/bin/python3
     && (python3 --version) || (python --version)
 
