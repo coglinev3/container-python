@@ -56,18 +56,20 @@ script:
   - ansible-playbook python-${IMAGE_TAG}.yml
 
 after_success:
-  # show container os-release
+  # Start a container from the new created image
   - >
-    docker run -it --rm
+    cid=$(docker run -d --rm --name check_python
     ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
-    env TERM=xterm cat /etc/os-release
-
+    tail -f /dev/null)
+  # show container os-release
+  - docker exec ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
   - >
-    docker run -it --rm
-    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
-    env TERM=xterm test -e /usr/bin/python3
-    && (python3 --version) || (python --version)
+    docker exec ${cid} test -e /usr/bin/python3
+    && docker exec ${cid} env TERM=xterm python3 --version
+    || docker exec ${cid} env TERM=xterm python --version
+  # Stop the container
+  - docker stop ${cid}
 
 deploy:
   provider: script
