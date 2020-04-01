@@ -33,8 +33,6 @@ env:
       IMAGE_ALTERNATE_TAG: ubuntu-bionic
     - IMAGE_TAG: ubuntu-16.04
       IMAGE_ALTERNATE_TAG: ubuntu-xenial
-    - IMAGE_TAG: ubuntu-14.04
-      IMAGE_ALTERNATE_TAG: ubuntu-trusty
 
 install:
   # Install Ansible and Python Docker Module
