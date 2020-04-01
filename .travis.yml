@@ -54,10 +54,16 @@ script:
 
 after_success:
   # show container os-release
-  - docker run -it --rm ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm cat /etc/os-release
+  - >
+    docker run -it --rm
+      ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
+      env TERM=xterm cat /etc/os-release
 
   # show container python version
-  - docker run -it --rm ${IMAGE_NAME}:${IMAGE_TAG} env TERM=xterm python3 --version
+  - >
+    docker run -it --rm
+      ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
+      env TERM=xterm python3 --version
 
 deploy:
   provider: script
