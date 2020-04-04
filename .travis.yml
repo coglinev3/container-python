@@ -72,7 +72,7 @@ after_success:
     docker exec ${cid} env TERM=xterm /bin/bash -c "
     /usr/libexec/platform-python --version 2>/dev/null
     || python3 --version 2>/dev/null
-    || python --version 2>/dev/null
+    || python --version
     || echo python not available"
   # Stop the container
   - docker stop ${cid}
