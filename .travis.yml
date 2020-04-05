@@ -83,7 +83,7 @@ after_success:
   # Start a container from the new created image
   - >
     cid=$(docker run -d --rm --name check_python
-    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
+    ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}-${CONTAINER_DISTRO_VERSION}
     tail -f /dev/null)
   # show container os-release
   - docker exec ${cid} env TERM=xterm cat /etc/os-release
