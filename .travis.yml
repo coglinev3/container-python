@@ -89,7 +89,7 @@ after_success:
   - docker exec ${cid} env TERM=xterm cat /etc/os-release
   # show container python version
   - >
-    docker exec ${cid} env TERM=xterm /bin/bash -c "
+    docker exec ${cid} env TERM=xterm /bin/sh -c "
     /usr/libexec/platform-python --version
     || python3 --version
     || python --version
