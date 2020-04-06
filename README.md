@@ -8,16 +8,51 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
 
 ## Tags
 
-  - `alpine-3.9`: Alpine Linux 3.9
+  - `alpine-3.11`, `latest`: Alpine Linux 3.11
   - `alpine-3.10`: Alpine Linux 3.10
-  - `alpine-3.11`: Alpine Linux 3.11
+  - `alpine-3.9`: Alpine Linux 3.9
+  - `centos-8`: CentOS 8
+  - `centos-7`: CentOS 7
+  - `centos-6`: CentOS 6
+  - `debian-10`, `debian-buster`: Debian 10 (Buster)
+  - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
-  - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
+  - `fedora-31`: Fedora 31
+  - `fedora-30`: Fedora 30
+  - `fedora-29`: Fedora 29
+  - `ubuntu-19.10`, `ubuntu-eoan`: Ubuntu 19.10 (Eoan Ermine)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
+  - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
 
 ## Requirements
 
 Ansible and Docker must be installed.
+
+
+## Environment Variables
+
+The following environment variables are used in conjunction with the playbook.
+
+```sh
+# Linux Distribution for the base image (default: centos)
+CONTAINER_DISTRO=ubuntu
+
+# Version of the Linux Distribution (default: 7)
+CONTAINER_DISTRO_VERSION=16.04
+
+# Namespace for the new image
+IMAGE_NAMESPACE=coglinev3                                                                                                                                  
+
+# Name for the new image
+IMAGE_NAME=python 
+
+# Optional: Alternate tag for the nєw image
+# The default tag is a combination from CONTAINER_DISTRO and CONTAINER_DISTRO_VERSION,
+# for example: ubuntu-16.04
+# Additionally an alternate tag for the new image can be specified.
+IMAGE_ALTERNATE_TAG=ubuntu-xenial
+```
+
 
 ## Example Playbook
 
@@ -25,25 +60,26 @@ Ansible and Docker must be installed.
 ---
 - hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: false
   vars:
-    base_image: ubuntu
-    base_image_tag: 16.04
-    container_name: py_ubuntu_1604
-    image_namespace: coglinev3
-    image_name: python
-    image_tag: ubuntu-16.04
+    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('centos', true) }}"
+    container_distro_version: "{{ lookup('env','CONTAINER_DISTRO_VERSION') | default('7', true) }}"
+    base_image: "{{ container_distro }}:{{ container_distro_version }}"
+    container_name: "py_{{ container_distro }}_{{ container_distro_version }}"
+    image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
+    image_name: "{{ lookup('env','IMAGE_NAME') | default('python', true) }}"
+    image_tag: "{{ container_distro }}-{{ container_distro_version }}"
   pre_tasks:
     - name: Make the latest version of the base image available locally.
       docker_image:
-        name: '{{ base_image }}:{{ base_image_tag }}'
+        name: '{{ base_image }}'
         source: pull
         force_source: true
     - name: Create the Docker container.
       docker_container:
-        image: '{{ base_image }}:{{ base_image_tag }}'
+        image: '{{ base_image }}'
         name: '{{ container_name }}'
-        command: sleep infinity
+        command: tail -f /dev/null
     - name: Add the newly created container to the inventory.
       add_host:
         hostname: '{{ container_name }}'
@@ -67,21 +103,26 @@ Ansible and Docker must be installed.
 
 ## How to Build
 
-You can create an image locally, for example for Ubuntu 16.04, as follows:
+You can create an image locally, for example for Ubuntu 18.04, as follows:
 
 ```sh
 git clone https://github.com/coglinev3/container-python.git
 cd container-python
-ansible-playbook python-ubuntu-16.04.yml
+CONTAINER_DISTRO=ubuntu \
+CONTAINER_DISTRO_VERSION=18.04 \
+IMAGE_ALTERNATE_TAG=ubuntu-bionic \
+ansible-playbook container-python.yml
 ```
 
 ## Version
 
-Release: 1.2.0
+Release: 1.3.0
+
 
 ## License
 
 GNU GPLv3
+
 
 ## Author
 
