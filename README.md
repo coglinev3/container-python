@@ -117,7 +117,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.3.0
+Release: 1.4.0
 
 
 ## License
