@@ -20,6 +20,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `fedora-31`: Fedora 31
   - `fedora-30`: Fedora 30
   - `fedora-29`: Fedora 29
+  - `ubuntu-20.04`, `ubuntu-focal`: Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-19.10`, `ubuntu-eoan`: Ubuntu 19.10 (Eoan Ermine)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
@@ -116,7 +117,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.3.0
+Release: 1.4.0
 
 
 ## License
