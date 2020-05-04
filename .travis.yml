@@ -51,6 +51,9 @@ env:
       CONTAINER_DISTRO_VERSION: 8
       IMAGE_ALTERNATE_TAG: debian-jessie
     - CONTAINER_DISTRO: ubuntu
+      CONTAINER_DISTRO_VERSION: 20.04
+      IMAGE_ALTERNATE_TAG: ubuntu-focal
+    - CONTAINER_DISTRO: ubuntu
       CONTAINER_DISTRO_VERSION: 19.10
       IMAGE_ALTERNATE_TAG: ubuntu-eoan
     - CONTAINER_DISTRO: ubuntu
