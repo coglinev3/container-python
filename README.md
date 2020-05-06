@@ -17,6 +17,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
+  - `fedora-32`: Fedora 32
   - `fedora-31`: Fedora 31
   - `fedora-30`: Fedora 30
   - `fedora-29`: Fedora 29
@@ -117,7 +118,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.4.0
+Release: 1.5.0
 
 
 ## License
