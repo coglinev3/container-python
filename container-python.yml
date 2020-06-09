@@ -3,15 +3,16 @@
   connection: local
   gather_facts: false
   vars:
+    container_namespace: "{{ lookup('env','CONTAINER_NAMESPACE') | default('docker.io', true) }}"
     container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('centos', true) }}"
     container_distro_version: "{{ lookup('env','CONTAINER_DISTRO_VERSION') | default('7', true) }}"
-    base_image: "{{ container_distro }}:{{ container_distro_version }}"
+    base_image: "{{ container_namespace }}/{{ container_distro }}:{{ container_distro_version }}"
     container_name: "py_{{ container_distro }}_{{ container_distro_version }}"
     image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
     image_name: "{{ lookup('env','IMAGE_NAME') | default('python', true) }}"
     image_tag: "{{ container_distro }}-{{ container_distro_version }}"
   pre_tasks:
-    - name: Make the latest version of the base image available locally.
+    - name: "Make base image {{ base_image }} available locally."
       docker_image:
         name: '{{ base_image }}'
         source: pull
