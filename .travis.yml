@@ -95,9 +95,9 @@ after_success:
   # show container python version
   - >
     docker exec ${cid} env TERM=xterm /bin/sh -c "
-    /usr/libexec/platform-python --version
-    || python3 --version
-    || python --version
+    /usr/libexec/platform-python --version 2> /dev/null
+    || python3 --version 2> /dev/null
+    || python --version 2>&1
     || echo python not available"
   # Stop the container
   - docker stop ${cid}
