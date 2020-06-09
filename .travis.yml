@@ -91,6 +91,8 @@ script:
   - ansible-playbook container-python.yml
 
 after_success:
+  # Show container images
+  - docker images
   # Start a container from the new created image
   - >
     cid=$(docker run -d --rm --name check_python
