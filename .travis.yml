@@ -1,9 +1,8 @@
 ---
-dist: bionic
+dist: focal
 addons:
   apt:
     packages:
-      - docker-ce
       - libssl-dev
       - libffi-dev
       - python3
@@ -103,7 +102,7 @@ after_success:
   # show container python version
   - >
     docker exec ${cid} env TERM=xterm /bin/sh -c "
-    /usr/libexec/platform-python --version 2> /dev/null
+    /usr/libexec/platform-python --version  2>&1 | grep -v platform-python
     || python3 --version 2> /dev/null
     || python --version 2>&1
     || echo python not available"
