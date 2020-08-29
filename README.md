@@ -20,10 +20,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
   - `fedora-32`: Fedora 32
   - `fedora-31`: Fedora 31
-  - `fedora-30`: Fedora 30
-  - `fedora-29`: Fedora 29
   - `ubuntu-20.04`, `ubuntu-focal`: Ubuntu 20.04 LTS (Focal Fossa)
-  - `ubuntu-19.10`, `ubuntu-eoan`: Ubuntu 19.10 (Eoan Ermine)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
 
