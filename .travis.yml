@@ -108,3 +108,13 @@ deploy:
   cleanup: false
   on:
     branch: master
+
+jobs:
+  include:
+    - stage: trigger container-ansible
+      if: branch = master
+      install: skip
+      before_script: skip
+      after_success: skip
+      deploy: skip
+      script: bash .travis/trigger-job $(dirname $TRAVIS_REPO_SLUG) container-ansible
