@@ -19,7 +19,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
   - `fedora-32`: Fedora 32
-  - `fedora-31`: Fedora 31
   - `ubuntu-20.04`, `ubuntu-focal`: Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
   - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
