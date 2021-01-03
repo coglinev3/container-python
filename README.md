@@ -14,7 +14,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `alpine-3.9`: Alpine Linux 3.9
   - `centos-8`: CentOS 8
   - `centos-7`: CentOS 7
-  - `centos-6`: CentOS 6
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
