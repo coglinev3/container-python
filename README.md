@@ -116,7 +116,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.7.0
+Release: 1.8.0
 
 
 ## License
@@ -126,4 +126,4 @@ GNU GPLv3
 
 ## Author
 
-Created in 2020, by Cogline.v3.
+Copyright &copy; 2021 Cogline.v3.
