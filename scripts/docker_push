@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Login to docker.io
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 # push the image
 docker push ${IMAGE_NAMESPACE}/${IMAGE_NAME}:${CONTAINER_DISTRO}-${CONTAINER_DISTRO_VERSION}
@@ -13,4 +13,4 @@ if ! [ -z $IMAGE_ALTERNATE_TAG ]; then
 fi
 
 # Logout from docker.io
-docker logout
+#docker logout

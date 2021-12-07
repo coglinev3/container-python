@@ -1,6 +1,6 @@
 # Linux Images with Python for use with Ansible Molecule
 
-[![Build Status](https://travis-ci.com/coglinev3/container-python.svg?branch=master)](https://travis-ci.com/coglinev3/container-python) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/container-python) [![GitHub license](https://img.shields.io/github/license/coglinev3/container-python)](https://github.com/coglinev3/container-python/blob/master/LICENSE)
+[![Build](https://github.com/coglinev3/container-python/actions/workflows/build.yml/badge.svg)](https://github.com/coglinev3/container-python/actions/workflows/build.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/container-python) [![GitHub license](https://img.shields.io/github/license/coglinev3/container-python)](https://github.com/coglinev3/container-python/blob/master/LICENSE)
 
 
 In order to test [Ansible](https://docs.ansible.com/ansible/latest/index.html "Ansible Documentation") roles with the help of [Ansible Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule Documentation"), Docker images with Python 2 (version 2.7) or Python 3 (version 3.5 and higher) are required. To reduce the image size some official Docker images for Linux distributions (like Alpine or Ubuntu) are not shipped with Python 2 or Python 3 preinstalled. For this reason, you cannot use these Docker images with Ansible.
