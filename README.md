@@ -21,6 +21,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
+  - `fedora-35`: Fedora 35
   - `fedora-34`: Fedora 34
   - `fedora-33`: Fedora 33
   - `fedora-32`: Fedora 32
