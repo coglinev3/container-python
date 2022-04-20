@@ -66,8 +66,6 @@ jobs:
             CONTAINER_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: centos
             CONTAINER_DISTRO_VERSION: 7
-          - CONTAINER_DISTRO: centos
-            CONTAINER_DISTRO_VERSION: 8
           - CONTAINER_DISTRO: fedora
             CONTAINER_DISTRO_VERSION: 32
           - CONTAINER_DISTRO: fedora
