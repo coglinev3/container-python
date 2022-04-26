@@ -89,6 +89,9 @@ jobs:
             CONTAINER_DISTRO_VERSION: 8
             IMAGE_ALTERNATE_TAG: debian-jessie
           - CONTAINER_DISTRO: ubuntu
+            CONTAINER_DISTRO_VERSION: "22.04"
+            IMAGE_ALTERNATE_TAG: ubuntu-jammy
+          - CONTAINER_DISTRO: ubuntu
             CONTAINER_DISTRO_VERSION: "20.04"
             IMAGE_ALTERNATE_TAG: ubuntu-focal
           - CONTAINER_DISTRO: ubuntu
