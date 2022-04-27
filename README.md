@@ -122,7 +122,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.11.0
+Release: 1.12.0
 
 
 ## License
@@ -132,4 +132,4 @@ GNU GPLv3
 
 ## Author
 
-Copyright &copy; 2021 Cogline.v3.
+Copyright &copy; 2022 Cogline.v3.
