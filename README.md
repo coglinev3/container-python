@@ -8,7 +8,8 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
 
 ## Tags
 
-  - `alpine-3.15`, `latest`: Alpine Linux 3.15
+  - `alpine-3.16`, `latest`: Alpine Linux 3.16
+  - `alpine-3.15`, Alpine Linux 3.15
   - `alpine-3.14`, Alpine Linux 3.14
   - `alpine-3.13`, Alpine Linux 3.13
   - `alpine-3.12`: Alpine Linux 3.12
