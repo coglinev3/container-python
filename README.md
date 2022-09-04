@@ -12,9 +12,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `alpine-3.14`, Alpine Linux 3.14
   - `alpine-3.13`, Alpine Linux 3.13
   - `alpine-3.12`: Alpine Linux 3.12
-  - `alpine-3.11`: Alpine Linux 3.11
-  - `alpine-3.10`: Alpine Linux 3.10
-  - `alpine-3.9`: Alpine Linux 3.9
   - `almalinux-8`: AlmaLinux 8
   - `centos-7`: CentOS 7
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
@@ -23,8 +20,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
   - `fedora-35`: Fedora 35
   - `fedora-34`: Fedora 34
-  - `fedora-33`: Fedora 33
-  - `fedora-32`: Fedora 32
   - `ubuntu-22.04`, `ubuntu-jammy`: Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal`: Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
