@@ -15,6 +15,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `alpine-3.13`, Alpine Linux 3.13
   - `alpine-3.12`: Alpine Linux 3.12
   - `almalinux-8`: AlmaLinux 8
+  - `almalinux-9`: AlmaLinux 9
   - `centos-7`: CentOS 7
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
