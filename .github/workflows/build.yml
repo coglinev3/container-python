@@ -71,6 +71,8 @@ jobs:
             CONTAINER_DISTRO_VERSION: 35
           - CONTAINER_DISTRO: fedora
             CONTAINER_DISTRO_VERSION: 36
+          - CONTAINER_DISTRO: fedora
+            CONTAINER_DISTRO_VERSION: 37
           - CONTAINER_DISTRO: debian
             CONTAINER_DISTRO_VERSION: 11
             IMAGE_ALTERNATE_TAG: debian-bullseye
