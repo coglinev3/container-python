@@ -77,9 +77,6 @@ jobs:
           - CONTAINER_DISTRO: debian
             CONTAINER_DISTRO_VERSION: 9
             IMAGE_ALTERNATE_TAG: debian-stretch
-          - CONTAINER_DISTRO: debian
-            CONTAINER_DISTRO_VERSION: 8
-            IMAGE_ALTERNATE_TAG: debian-jessie
           - CONTAINER_DISTRO: ubuntu
             CONTAINER_DISTRO_VERSION: "22.04"
             IMAGE_ALTERNATE_TAG: ubuntu-jammy

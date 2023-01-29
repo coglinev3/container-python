@@ -18,7 +18,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `debian-9`, `debian-stretch`: Debian 9 (Stretch)
-  - `debian-8`, `debian-jessie`: Debian 8 (Jessie)
   - `fedora-36`: Fedora 36
   - `fedora-35`: Fedora 35
   - `fedora-34`: Fedora 34
