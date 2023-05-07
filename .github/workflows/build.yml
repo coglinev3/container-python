@@ -65,6 +65,8 @@ jobs:
             CONTAINER_DISTRO_VERSION: 8
           - CONTAINER_DISTRO: almalinux
             CONTAINER_DISTRO_VERSION: 9
+          - CONTAINER_DISTRO: amazonlinux
+            CONTAINER_DISTRO_VERSION: 2023
           - CONTAINER_DISTRO: centos
             CONTAINER_DISTRO_VERSION: 7
           - CONTAINER_DISTRO: fedora
