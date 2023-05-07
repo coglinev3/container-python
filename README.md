@@ -19,6 +19,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `centos-7`: CentOS 7
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
+  - `fedora-38`: Fedora 38
   - `fedora-37`: Fedora 37
   - `fedora-36`: Fedora 36
   - `fedora-35`: Fedora 35
