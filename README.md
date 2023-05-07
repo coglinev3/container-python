@@ -122,7 +122,7 @@ ansible-playbook container-python.yml
 
 ## Version
 
-Release: 1.14.1
+Release: 1.15.0
 
 
 ## License
