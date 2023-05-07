@@ -112,7 +112,7 @@ jobs:
           echo "IMAGE_ALTERNATE_TAG=${{ matrix.IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
 
       - name: Install Ansible
-        run: python3 -m pip install --upgrade --user ansible ansible-lint docker
+        run: python3 -m pip install --upgrade --user "urllib3<2" ansible ansible-lint docker
 
       - name: Create Ansible roles directory
         run: mkdir -p ~/.ansible/roles
