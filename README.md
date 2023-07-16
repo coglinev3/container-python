@@ -66,65 +66,72 @@ IMAGE_ALTERNATE_TAG=ubuntu-xenial
 
 ```yml
 ---
-- hosts: localhost
+- name: Create Linux container with python
+  hosts: localhost
   connection: local
   gather_facts: false
   vars:
-    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('centos', true) }}"
-    container_distro_version: "{{ lookup('env','CONTAINER_DISTRO_VERSION') | default('7', true) }}"
-    base_image: "{{ container_distro }}:{{ container_distro_version }}"
+    container_namespace: "{{ lookup('env','CONTAINER_NAMESPACE') | default('docker.io', true) }}"
+    container_distro: "{{ lookup('env','CONTAINER_DISTRO') | default('alpine', true) }}"
+    container_distro_version: "{{ lookup('env','CONTAINER_DISTRO_VERSION') | default('3.18', true) }}"
+    base_image: "{{ container_namespace }}/{{ container_distro }}:{{ container_distro_version }}"
     container_name: "py_{{ container_distro }}_{{ container_distro_version }}"
     image_namespace: "{{ lookup('env','IMAGE_NAMESPACE') | default('coglinev3', true) }}"
     image_name: "{{ lookup('env','IMAGE_NAME') | default('python', true) }}"
     image_tag: "{{ container_distro }}-{{ container_distro_version }}"
   pre_tasks:
-    - name: Make the latest version of the base image available locally.
-      docker_image:
+    - name: "Make base image available locally: {{ base_image }}"
+      community.docker.docker_image:
         name: '{{ base_image }}'
         source: pull
         force_source: true
     - name: Create the Docker container.
-      docker_container:
+      community.general.docker_container:
+        container_default_behavior: no_defaults
         image: '{{ base_image }}'
         name: '{{ container_name }}'
         command: tail -f /dev/null
     - name: Add the newly created container to the inventory.
-      add_host:
+      ansible.builtin.add_host:
         hostname: '{{ container_name }}'
         ansible_connection: docker
   tasks:
     - name: "Install Python if needed"
-      import_role:
+      ansible.builtin.import_role:
         name: "coglinev3.ansible_python"
       delegate_to: '{{ container_name }}'
   post_tasks:
     - name: Commit the container.
-      command: >
+      ansible.builtin.command: >
         docker commit
         --author "Cogline.v3"
         {{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}
+      register: docker_commit
+      changed_when: docker_commit.rc == 0
+      failed_when: docker_commit.rc != 0
     - name: Remove the container.
-      docker_container:
+      community.general.docker_container:
+        container_default_behavior: no_defaults
         name: '{{ container_name }}'
         state: absent
 ```
 
 ## How to Build
 
-You can create an image locally, for example for Ubuntu 18.04, as follows:
+You can create an image locally, for example for Ubuntu 22.04, as follows:
 
 ```sh
 git clone https://github.com/coglinev3/container-python.git
 cd container-python
 CONTAINER_DISTRO=ubuntu \
-CONTAINER_DISTRO_VERSION=18.04 \
-IMAGE_ALTERNATE_TAG=ubuntu-bionic \
+CONTAINER_DISTRO_VERSION=22.04 \
+IMAGE_ALTERNATE_TAG=ubuntu-jammy \
 ansible-playbook container-python.yml
 ```
 
 ## Version
 
-Release: 1.15.0
+Release: 1.16.0
 
 
 ## License
