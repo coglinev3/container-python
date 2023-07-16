@@ -20,17 +20,14 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v3
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
       - name: Install test dependencies.
-        run: pip3 install yamllint
+        run: python3 -m pip install --user ansible ansible-lint
 
-      - name: Lint code.
-        run: |
-          yamllint .
+      - name: Lint code with yamllint.
+        run: yamllint .
+
+      - name: Lint code with ansible-lint.
+        run: ansible-lint
 
   # Build the images and push them to Docker repository.
   build:
@@ -43,9 +40,12 @@ jobs:
       matrix:
         include:
           - CONTAINER_DISTRO: alpine
-            CONTAINER_DISTRO_VERSION: "3.17"
+            CONTAINER_DISTRO_VERSION: "3.18"
             CONTAINER_NAMESPACE: coglinev3
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine
+            CONTAINER_DISTRO_VERSION: "3.17"
+            CONTAINER_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine
             CONTAINER_DISTRO_VERSION: "3.16"
             CONTAINER_NAMESPACE: coglinev3
@@ -102,11 +102,6 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v3
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
       - name: Set environment variables
         run: |
           echo "ANSIBLE_PYTHON_INTERPRETER=${pythonLocation}/bin/python3" >> $GITHUB_ENV
@@ -116,7 +111,7 @@ jobs:
           echo "IMAGE_ALTERNATE_TAG=${{ matrix.IMAGE_ALTERNATE_TAG }}" >> $GITHUB_ENV
 
       - name: Install Ansible
-        run: python3 -m pip install --upgrade --user "urllib3<2" ansible ansible-lint docker
+        run: python3 -m pip install --upgrade --user urllib3 ansible ansible-lint docker
 
       - name: Create Ansible roles directory
         run: mkdir -p ~/.ansible/roles
