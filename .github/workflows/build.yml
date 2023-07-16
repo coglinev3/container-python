@@ -80,6 +80,9 @@ jobs:
           - CONTAINER_DISTRO: fedora
             CONTAINER_DISTRO_VERSION: 38
           - CONTAINER_DISTRO: debian
+            CONTAINER_DISTRO_VERSION: 12
+            IMAGE_ALTERNATE_TAG: debian-bookworm
+          - CONTAINER_DISTRO: debian
             CONTAINER_DISTRO_VERSION: 11
             IMAGE_ALTERNATE_TAG: debian-bullseye
           - CONTAINER_DISTRO: debian

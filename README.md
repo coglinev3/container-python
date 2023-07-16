@@ -19,6 +19,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `almalinux-9`: AlmaLinux 9
   - `amazonlinux-2023`: Amazon Linux 2023
   - `centos-7`: CentOS 7
+  - `debian-12`, `debian-bookworm`: Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
   - `fedora-38`: Fedora 38
