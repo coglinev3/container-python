@@ -40,9 +40,12 @@ jobs:
       matrix:
         include:
           - CONTAINER_DISTRO: alpine
-            CONTAINER_DISTRO_VERSION: "3.18"
+            CONTAINER_DISTRO_VERSION: "3.19"
             CONTAINER_NAMESPACE: coglinev3
             IMAGE_ALTERNATE_TAG: latest
+          - CONTAINER_DISTRO: alpine
+            CONTAINER_DISTRO_VERSION: "3.18"
+            CONTAINER_NAMESPACE: coglinev3
           - CONTAINER_DISTRO: alpine
             CONTAINER_DISTRO_VERSION: "3.17"
             CONTAINER_NAMESPACE: coglinev3
