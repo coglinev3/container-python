@@ -23,6 +23,7 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `debian-12`, `debian-bookworm`: Debian 12 (Bookworm)
   - `debian-11`, `debian-bullseye`: Debian 11 (Bullseye)
   - `debian-10`, `debian-buster`: Debian 10 (Buster)
+  - `fedora-39`: Fedora 39
   - `fedora-38`: Fedora 38
   - `fedora-37`: Fedora 37
   - `fedora-36`: Fedora 36
