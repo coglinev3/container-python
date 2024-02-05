@@ -30,7 +30,6 @@ This repository contains images build by Ansible Playbooks and the Ansible role 
   - `ubuntu-22.04`, `ubuntu-jammy`: Ubuntu 22.04 LTS (Jammy Jellyfish)
   - `ubuntu-20.04`, `ubuntu-focal`: Ubuntu 20.04 LTS (Focal Fossa)
   - `ubuntu-18.04`, `ubuntu-bionic`: Ubuntu 18.04 LTS (Bionic Beaver)
-  - `ubuntu-16.04`, `ubuntu-xenial`: Ubuntu 16.04 LTS (Xenial Xerus)
 
 ## Requirements
 

@@ -97,9 +97,6 @@ jobs:
           - CONTAINER_DISTRO: ubuntu
             CONTAINER_DISTRO_VERSION: "18.04"
             IMAGE_ALTERNATE_TAG: ubuntu-bionic
-          - CONTAINER_DISTRO: ubuntu
-            CONTAINER_DISTRO_VERSION: "16.04"
-            IMAGE_ALTERNATE_TAG: ubuntu-xenial
 
     steps:
       - name: Check out the codebase.
